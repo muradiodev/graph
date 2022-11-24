@@ -21,23 +21,8 @@ public class GraphController {
     private final UserService userService;
 
 
-//    @GetMapping("/list")
-//    public String employeeList(Model model) throws IOException {
-//
-//        // get employees from data base
-//        List<Users> users = userService.findAll();
-//
-//        // add to the spring model
-//        model.addAttribute("employees", users);
-//        ApiTest apiTest = new ApiTest();
-////        apiTest.myMethod();
-//        model.addAttribute("apitest", apiTest);
-//
-//        return "employees/list";
-//    }
-
     @RequestMapping("/list")
-    public String getYourPage(Model model) throws IOException {
+    public String employeeList(Model model) throws IOException {
         // get employees from data base
         List<Users> users = userService.findAll();
 
@@ -46,7 +31,7 @@ public class GraphController {
         ApiTest apiTest = new ApiTest();
 //        apiTest.myMethod();
         model.addAttribute("apitest", apiTest);
-        return "employees/list";
+        return "employees/listexamp";
     }
 
     @GetMapping("/add")

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery jOrgChart Plugin Demo</title>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link href="/orgchart/orgchart.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/orgchart/orgchart.js"></script>
+    <script>
+        $(document).ready(function () {
+            // create a tree
+            $("#tree-data").jOrgChart({
+                chartElement: $("#tree-view"),
+                nodeClicked: nodeClicked
+            });
+
+            // lighting a node in the selection
+            function nodeClicked(node, type) {
+                node = node || $(this);
+                $('.jOrgChart .selected').removeClass('selected');
+                node.addClass('selected');
+            }
+        });
+    </script>
+    <style>
+        .container {
+            max-width: 960px;
+            margin: 150px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Demo Chart</h1>
+    <ul id="tree-data" style="display:none">
+        <li id="root">
+            AXITERA
+            <ul>
+
+                <li id="node1">
+                    Timo Albrecht
+                    <ul>
+                        <li id="node1">
+                            Marco Hipp
+                            <ul type="vertical">
+                                <li id="node2">
+                                    Tristan
+                                </li>
+                                <li id="node3">
+                                    Robin
+
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="node4" class="last">
+                            Slawomir
+                            <ul type="vertical">
+                                <li id="node5">
+                                    Aktan
+                                </li>
+
+                                <li id="node6">
+                                    Polihron
+                                </li>
+                                <li id="node7">
+                                    Murad
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="node8" class="last">
+
+                            <ul type="vertical">
+                                <li id="node9">
+                                    Anne
+                                </li>
+                                <li id="node10">
+                                    Corinna
+                                </li>
+                                <li id="node11">
+                                    Jose
+                                </li>
+                                <li id="node12">
+                                    Markus
+                                </li>
+                                <li id="node13">
+                                    Jonas
+                                </li>
+                                <li id="node14">
+                                    Monique
+                                </li>
+                                <li id="node15">
+                                    Benjamin
+                                </li>
+                                <li id="node16">
+                                    Franka
+                                </li>
+                                <li id="node17">
+                                    Katharina
+                                </li>
+                                <li id="node18">
+                                    Rischi
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li id="node19">
+                    Verena
+                </li>
+                <li id="node20">
+                    Christoph Kobusch
+                    <ul type="vertical">
+
+                        <li id="node21">
+                            Dania
+                        </li>
+                        <li id="node22" class="last">
+                            Ronan
+                        </li>
+                        <li id="node23" class="last">
+                            Sibylle
+                        </li>
+                    </ul>
+                </li>
+                <li id="node24" class="last">
+                    Joachim Schmidt
+                    <ul type="vertical">
+                        <li id="node25">
+                            Sven
+                        </li>
+
+                        <li id="node26">
+                            Nicholas Wolf
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li id="node27">
+            node23
+        </li>
+    </ul>
+
+    <div id="tree-view"></div>
+</div>
+
+</body>
+</html>
