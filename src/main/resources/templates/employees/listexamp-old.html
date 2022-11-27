@@ -304,11 +304,6 @@
 
 <div>
 
-    <tr th:each="emp: ${employees}">
-        <td th:text="${emp.users.personal_nr}" />
-        <td th:text="${emp.users.firstName}" />
-    </tr>
-
 </div>
 <div class="container">
     <ol class="organizational-chart">
@@ -331,41 +326,9 @@
                             <div>
                                 <h3>Tertiary</h3>
                             </div>
-                            <ol>
-                                <li>
-                                    <div>
-                                        <h4>Quaternary</h4>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div>
-                                        <h4>Quaternary</h4>
-                                    </div>
-                                    <ol>
-                                        <li>
-                                            <div>
-                                                <h5>Quinary</h5>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div>
-                                                <h5>Quinary</h5>
-                                            </div>
-                                        </li>
-                                    </ol>
-                                </li>
-                                <li>
-                                    <div>
-                                        <h4>Quaternary</h4>
-                                    </div>
-                                </li>
-                            </ol>
+
                         </li>
-                        <li>
-                            <div>
-                                <h3>Tertiary</h3>
-                            </div>
-                        </li>
+
                     </ol>
                 </li>
                 <li>
