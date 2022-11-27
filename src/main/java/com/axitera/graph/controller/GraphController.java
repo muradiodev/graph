@@ -1,7 +1,7 @@
 package com.axitera.graph.controller;
 
-import com.axitera.graph.ApiTest;
 import com.axitera.graph.entity.Users;
+import com.axitera.graph.model.EmployeesView;
 import com.axitera.graph.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -9,28 +9,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/employees")
-//@Slf4j
-//@CrossOrigin
 public class GraphController {
 
-    private final UserService userService;
 
+    private final UserService userService;
+    record Request(LocalDateTime start, LocalDateTime end) {
+    }
+
+    private LocalDateTime start = LocalDateTime.parse("2017-07-21T00:00:00");
+    private LocalDateTime end = LocalDateTime.parse("2018-07-21T23:59:00");
 
     @RequestMapping("/list")
     public String employeeList(Model model) throws IOException {
-        // get employees from data base
-        List<Users> users = userService.findAll();
 
-        // add to the spring model
+        List<EmployeesView> users = userService.findAll(start, end);
         model.addAttribute("employees", users);
-        ApiTest apiTest = new ApiTest();
-//        apiTest.myMethod();
-        model.addAttribute("apitest", apiTest);
         return "employees/listexamp";
     }
 

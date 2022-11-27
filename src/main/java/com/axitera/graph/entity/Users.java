@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -21,9 +22,19 @@ public class Users {
     int personal_nr;
 
     String email;
-    String first_name;
-    String last_name;
+    @Column(name = "first_name")
+    String firstName;
+    String lastName;
     String roles;
     String team;
     String chief;
+    LocalDateTime creationTime;
+    LocalDateTime modification_time;
+    LocalDateTime closeTime;
+    int target_working_hours;
+    String career_stage;
+    int vacation_days;
+    int min_bonus_limit_percent;
+    int overtime_percent;
+    int overtime_leftover;
 }

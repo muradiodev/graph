@@ -1,17 +1,19 @@
 package com.axitera.graph.service;
 
 import com.axitera.graph.entity.Users;
-import org.springframework.ui.Model;
+import com.axitera.graph.model.EmployeesView;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 public interface UserService {
 
-    public List<Users> findAll();
+    List<EmployeesView> findAll(LocalDateTime start, LocalDateTime end);
 
-    public Users findById(int theId);
+    Users findById(int theId);
 
-    public void save(Users users);
+    void save(Users users);
 
-    public void deleteById(int theId);
+    void deleteById(int theId);
 }
