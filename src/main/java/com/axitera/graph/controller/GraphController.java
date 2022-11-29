@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
@@ -31,20 +32,22 @@ public class GraphController {
 
 
     @RequestMapping("/list")
-    public String employeeList(Model model) throws IOException {
-        LocalDateTime start = LocalDateTime.parse("2017-07-21T00:00:00");
-        LocalDateTime end = LocalDateTime.parse("2018-07-21T23:59:00");
-        List<EmployeesView> users = userService.findAll(start, end);
-        model.addAttribute("employees", users);
-        return "employees/listexamp";
-    }
+    public String employeeList(Model model, @RequestParam(value = "date", required = false) String date) throws IOException {
 
-    @RequestMapping("/list/year")
-    public String handlePostRequest(Model model, @RequestParam(value = "date", required = false) String date) {
-        String[] result = date.split("-");
+        String start;
+        String end;
+        String[] result;
+        int year = Year.now().getValue();
 
-        String start = result[0] + "-01-01T00:00:00";
-        String end = result[1] + "-12-28T23:59:00";
+        if (date ==null) {
+            start = (year - 1) + "-01-01T00:00:00";
+            end = year + "-12-28T23:59:00";
+        } else {
+            result = date.split("-");
+            start = result[0] + "-01-01T00:00:00";
+            end = result[1] + "-12-28T23:59:00";
+        }
+
 
         List<EmployeesView> users = userService.findAll(LocalDateTime.parse(start), LocalDateTime.parse(end));
 
@@ -52,6 +55,11 @@ public class GraphController {
         model.addAttribute("employees", users);
         return "employees/listexamp";
     }
+
+//    @RequestMapping("/list/year")
+//    public String handlePostRequest(Model model) {
+//
+//    }
 
     @GetMapping("/add")
     public String addEmployee(Model model) {

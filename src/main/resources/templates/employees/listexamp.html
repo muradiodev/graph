@@ -331,7 +331,7 @@
 
 </div>
 <div class="container">
-    <form action="#" data-th-action="@{/employees/list/year}" data-th-object="${model}" >
+    <form action="#" data-th-action="@{/employees/list}" data-th-object="${model}" >
         <select class="form-select form-select-lg" aria-label="Default select example" th:name="date">
             <option selected>Open this select menu</option>
             <option th:selected="${date}"  th:each="year : ${#numbers.sequence(2017, #dates.year(#dates.createNow()))}"
