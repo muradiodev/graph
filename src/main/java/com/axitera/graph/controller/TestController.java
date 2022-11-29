@@ -19,10 +19,13 @@ public class TestController {
 
     record Request(LocalDateTime start, LocalDateTime end) {
     }
-
+    private LocalDateTime start = LocalDateTime.parse("2017-07-21T00:00:00");
+    private LocalDateTime end = LocalDateTime.parse("2018-07-21T23:59:00");
 
     @GetMapping("/")
-    public List<EmployeesView> getEmps(@RequestBody Request request) {
-        return userService.findAll(request.start, request.end);
+//    public List<EmployeesView> getEmps(@RequestBody Request request) {
+    public List<EmployeesView> getEmps() {
+//        return userService.findAll(request.start, request.end);
+        return userService.findAll(start, end);
     }
 }

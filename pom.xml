@@ -69,18 +69,13 @@
             <version>${org.mapstruct.version}</version>
         </dependency>
         <dependency>
-            <groupId>e-iceblue</groupId>
-            <artifactId>spire.doc</artifactId>
-            <version>10.11.6</version>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.0.0-2</version>
         </dependency>
+
     </dependencies>
-    <repositories>
-        <repository>
-            <id>com.e-iceblue</id>
-            <name>e-iceblue</name>
-            <url>https://repo.e-iceblue.com/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
+
 
     <build>
         <plugins>

@@ -22,7 +22,6 @@ public class Users {
     int personal_nr;
 
     String email;
-    @Column(name = "first_name")
     String firstName;
     String lastName;
     String roles;
