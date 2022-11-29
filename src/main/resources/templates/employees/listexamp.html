@@ -14,7 +14,7 @@
         ol.organizational-chart li > div {
             color: white;
             position: relative;
-            padding: 50px;
+            padding: 0px;
             font-family: "Times New Roman", Times, serif;
 
         }
@@ -165,7 +165,6 @@
         ol.organizational-chart > li > ol > li > ol > li > ol > li > div {
             border: 3px solid #1EA0DA;
         }
-
 
 
         @media only screen and ( min-width: 64em ) {
@@ -322,24 +321,36 @@
             }
 
         }
+        form{
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-<div >
+<div class="container form">
+
+    <div class="row">
+        <div class="col-md-3 offset-md-3"></div>
+        <div class="col-md-3 offset-md-3">
+            <form action="#" data-th-action="@{/employees/list}" data-th-object="${model}">
+                <select class="form-select form-select-lg" aria-label="Default select example" th:name="date">
+                    <option selected>Open this select menu</option>
+                    <option th:selected="${date}"
+                            th:each="year : ${#numbers.sequence(2017, #dates.year(#dates.createNow()))}"
+                            th:value="${year}+'-'+${year+1}" th:text="${year}+'-'+${year+1}">
+                    </option>
+                </select>
+                <button type="submit" class="btn btn-outline-primary" name="action" value="save">Show</button>
+            </form>
+        </div>
+    </div>
 
 
 </div>
 <div class="container">
-    <form action="#" data-th-action="@{/employees/list}" data-th-object="${model}" >
-        <select class="form-select form-select-lg" aria-label="Default select example" th:name="date">
-            <option selected>Open this select menu</option>
-            <option th:selected="${date}"  th:each="year : ${#numbers.sequence(2017, #dates.year(#dates.createNow()))}"
-                    th:value="${year}+'-'+${year+1}" th:text="${year}+'-'+${year+1}">
-            </option>
-        </select>
-        <button type="submit" class="btn btn-outline-primary btn-lg" name="action" value="save">Show</button>
-    </form>
+
     <ol class="organizational-chart">
         <li>
             <div>
@@ -350,13 +361,13 @@
                     <div>
                         <h2 th:text="${emp.users.firstName}">Secondary</h2>
                     </div>
-                    <ol >
+                    <ol>
                         <li th:each="child: ${emp.children}" th:if="${child.users.roles == 'OBOLUS_TEAM_LEAD'}">
                             <div>
-                                <h3 th:text="${child.users.firstName}" >Tertiary</h3>
+                                <h3 th:text="${child.users.firstName}">Tertiary</h3>
                             </div>
-                            <ol >
-                                <li   th:each="subc: ${child.children}" >
+                            <ol>
+                                <li th:each="subc: ${child.children}">
                                     <div>
                                         <h4 th:text="${subc.users.firstName}">1</h4>
                                     </div>
@@ -365,7 +376,7 @@
                         </li>
                         <li th:each="childelse: ${emp.children}" th:if="${childelse.users.roles == 'OBOLUS_STAFF'}">
                             <div>
-                                <h3 th:text="${childelse.users.firstName}" >Tertiary</h3>
+                                <h3 th:text="${childelse.users.firstName}">Tertiary</h3>
                             </div>
 
                         </li>
