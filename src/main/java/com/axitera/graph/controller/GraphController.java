@@ -49,7 +49,7 @@ public class GraphController {
 
         model.addAttribute("date", date);
         model.addAttribute("employees", users);
-        return "employees/listexamp";
+        return "employees/list-employees";
     }
 
 
