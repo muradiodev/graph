@@ -37,8 +37,8 @@ public class GraphController {
         int year = Year.now().getValue();
 
         if (date == null) {
-            start = (year - 1) + "-01-01T00:00:00";
-            end = year + "-12-28T23:59:00";
+            start = (year - 5) + "-01-01T00:00:00";
+            end = (year - 4) + "-12-28T23:59:00";
         } else {
             result = date.split("-");
             start = result[0] + "-01-01T00:00:00";
@@ -49,7 +49,7 @@ public class GraphController {
 
         model.addAttribute("date", date);
         model.addAttribute("employees", users);
-        return "employees/list-employees";
+        return "employees/listjs";
     }
 
 
