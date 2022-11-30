@@ -31,23 +31,24 @@ public class GraphController {
 
 
     @RequestMapping("/list")
-    public String employeeList(Model model, @RequestParam(value = "date", required = false) String date) {
-        String start, end;
-        String[] result;
+    public String employeeList(Model model, @RequestParam(value = "start", required = false) String start, @RequestParam(value = "end", required = false) String end) {
+//        String start, end;
+//        String[] result;
         int year = Year.now().getValue();
 
-        if (date == null) {
-            start = (year - 5) + "-01-01T00:00:00";
-            end = (year - 4) + "-12-28T23:59:00";
+        if (start == null || end == null) {
+            start = (year - 1) + "-01-01T00:00:00";
+            end = year + "-12-28T23:59:00";
         } else {
-            result = date.split("-");
-            start = result[0] + "-01-01T00:00:00";
-            end = result[1] + "-12-28T23:59:00";
+//            result = date.split("-");
+            start = start + "-01-01T00:00:00";
+            end = end + "-12-28T23:59:00";
         }
 
         List<EmployeesView> users = userService.findAll(LocalDateTime.parse(start), LocalDateTime.parse(end));
 
-        model.addAttribute("date", date);
+        model.addAttribute("start", start);
+        model.addAttribute("end", end);
         model.addAttribute("employees", users);
         return "employees/listjs";
     }
