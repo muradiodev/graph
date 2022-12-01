@@ -1,22 +1,15 @@
 package com.axitera.graph.controller;
 
-import com.axitera.graph.entity.Users;
 import com.axitera.graph.model.EmployeesView;
 import com.axitera.graph.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Year;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,25 +24,30 @@ public class GraphController {
 
 
     @RequestMapping("/list")
-    public String employeeList(Model model, @RequestParam(value = "start", required = false) String start, @RequestParam(value = "end", required = false) String end) {
-//        String start, end;
-//        String[] result;
+    public String employeeList(Model model, @RequestParam(value = "date", required = false) String date) {
+        String start, end;
+        String[] result;
         int year = Year.now().getValue();
 
-        if (start == null || end == null) {
+        if (date == null || date.equals("0")) {
             start = (year - 1) + "-01-01T00:00:00";
             end = year + "-12-28T23:59:00";
         } else {
-//            result = date.split("-");
-            start = start + "-01-01T00:00:00";
-            end = end + "-12-28T23:59:00";
+            result = date.split("-");
+            model.addAttribute("date", date);
+
+            start = result[0] + "-01-01T00:00:00";
+            end = result[1] + "-12-28T23:59:00";
         }
 
         List<EmployeesView> users = userService.findAll(LocalDateTime.parse(start), LocalDateTime.parse(end));
 
-        model.addAttribute("start", start);
-        model.addAttribute("end", end);
-        model.addAttribute("employees", users);
+        if (!users.isEmpty()) {
+            model.addAttribute("employees", users);
+        } else {
+            model.addAttribute("employees", "none");
+        }
+
         return "employees/listjs";
     }
 

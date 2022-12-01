@@ -7,7 +7,7 @@
     <!--    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 
     <title>Employee Tree</title>
     <style>
@@ -157,28 +157,42 @@
         <div class="col-md-3 offset-md-3"></div>
         <div class="col-md-3 offset-md-3">
             <form action="#" data-th-action="@{/employees/list}" data-th-object="${model}">
-                <select class="form-select form-select-lg" th:name="start">
-                    <option>Open this select menu</option>
+                <select class="date form-select form-select-lg" th:name="date">
+                    <option value="0">Wählen</option>
                     <option th:each="year : ${#numbers.sequence(2017, #dates.year(#dates.createNow()))}"
-                            th:value="${year}" th:text="${year}">
+                            th:value="${year+'-'+(year+1)}" th:text="${year+'-'+(year+1)}">
                     </option>
                 </select>
-                <select class="form-select form-select-lg" th:name="end">
-                    <option>Open this select menu</option>
-                    <option th:each="year : ${#numbers.sequence(2017, #dates.year(#dates.createNow()))}"
-                            th:value="${year+1}" th:text="${year+1}">
-                    </option>
-                </select>
-                <button type="submit" class="btn btn-outline-primary" name="action" value="show">Show</button>
+
+                <button type="submit" class="btn btn-outline-primary" name="action" value="show">
+                   Search
+                </button>
             </form>
         </div>
     </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var date = [[${date}]];
+        // var end = [[${end}]];
+        // console.log(username)
+        /*]]>*/
 
+        $(document).ready(function () {
+
+
+            $(".date option[value='" + date + "']").attr("selected", "selected");
+            // $(".end option[value='" + end + "']").attr("selected","selected");
+        });
+    </script>
 
 </div>
 
+
 <div class="chart-container">
-    <figure>
+    <div style="text-align: center" >
+        <h2 style="color: red" th:if="${employees == 'none'}">Keine Daten</h2>
+    </div>
+    <figure th:if="${employees != 'none'}">
         <!--        <figcaption>Example sitemap</figcaption>-->
         <ul class="tree">
             <li><span class="level-1">Axitera GmbH</span>
@@ -188,7 +202,7 @@
                         <ul>
                             <li th:each="child: ${emp.children}"
                                 th:if="${child.users.roles == 'OBOLUS_TEAM_LEAD'}">
-                                <span class="level-3" th:text="${child.users.firstName+' '+emp.users.lastName}">3</span>
+                                <span class="level-3" th:text="${child.users.firstName+' '+child.users.lastName}">3</span>
                                 <ul>
                                     <li type="vertical" th:each="subc: ${child.children}">
                                         <span class="level-4" th:text="${subc.users.firstName+' '+subc.users.lastName}">4</span>
@@ -216,6 +230,7 @@
             </li>
         </ul>
     </figure>
+
 </div>
 
 
